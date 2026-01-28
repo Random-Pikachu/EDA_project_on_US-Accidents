@@ -9,8 +9,12 @@ import io
 from streamlit_folium import folium_static
 import plotly.express as px
 
-datafile = 'US_Accidents_Dec21_updated.csv'
-df = pd.read_csv(datafile)
+@st.cache_data
+def load_data():
+    datafile = 'US_Accidents_Dec21_updated.csv'
+    return pd.read_csv(datafile)
+
+df = load_data()
 
 selected = st.sidebar.selectbox(
     "Which columns of the dataset you want to analyse?",
@@ -90,7 +94,7 @@ elif selected == "3. City":
 elif selected == '4. Start Time of the Accident':
     st.title('Analysis of Start_Time Column')
     st.table(df.Start_Time[:30])
-    df.Start_Time = pd.to_datetime(df.Start_Time)
+    df.Start_Time = pd.to_datetime(df.Start_Time, format='mixed')
 
     st.write('\u2022 The below graph shows \u0025age of accidents in a day i.e. in each hour. From the graph we can observe that most of the accidents occur around 2PM - 5PM i.e. average of 75.5%')
 
@@ -136,7 +140,7 @@ elif selected == "5. Starting Longitude and Starting Latitude & on Weather Condi
 
     st.markdown('### Below is the heatmap of the starting latitude and longitude')
     map = folium.Map(location = [38,-98], zoom_start = 4)
-    sample_df = df.sample(int(0.01*len(df)))
+    sample_df = df.sample(int(0.001*len(df)))
     lat_lon_pairs = list(zip(list(df.Start_Lat), list(df.Start_Lng)))
     HeatMap(lat_lon_pairs).add_to(map)
     folium_static(map)

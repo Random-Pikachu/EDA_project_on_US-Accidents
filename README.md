@@ -1,13 +1,13 @@
 # EDA_project_on_US-Accidents
  
 ## Before Running the program ensure that you have these modules installed in your pc
-1. folium==0.13.0
-2. matplotlib==3.5.2
-3. pandas==1.4.2
-4. plotly==5.11.0
-5. seaborn==0.11.2
-6. streamlit==1.14.0
-7. streamlit_folium==0.7.0
+folium==0.20.0
+matplotlib==3.10.8
+pandas==2.3.3
+plotly==6.5.2
+seaborn==0.13.2
+streamlit==1.53.1
+streamlit_folium==0.26.1
 
 
 ## Steps to run the program:-
